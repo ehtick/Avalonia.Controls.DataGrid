@@ -26,7 +26,7 @@ namespace Avalonia.Controls.Primitives
 
         public DataGridRowsPresenter()
         {
-            AddHandler(Gestures.ScrollGestureEvent, OnScrollGesture);
+            ScrollGesture += OnScrollGesture;
         }
 
         internal DataGrid? OwningGrid
