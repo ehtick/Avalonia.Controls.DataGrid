@@ -1180,21 +1180,24 @@ namespace Avalonia.Controls
         {
             string result = SortMemberPath;
 
-            if (String.IsNullOrEmpty(result))
+            if (string.IsNullOrEmpty(result))
             {
                 if (this is DataGridBoundColumn boundColumn)
                 {
-                    if (boundColumn.Binding is Binding binding)
+                    if (boundColumn.Binding is CompiledBinding compiledBinding)
+                    {
+                        result = compiledBinding.Path?.ToString();
+                    }
+                    else if (boundColumn.Binding is Binding binding)
                     {
                         result = binding.Path;
                     }
-                    else if (boundColumn.Binding is CompiledBindingExtension compiledBinding)
+                    else if(boundColumn.Binding is ReflectionBinding rb)
                     {
-                        result = compiledBinding.Path.ToString();
+                        result = rb.Path; 
                     }
                 }
             }
-
             return result;
         }
 
